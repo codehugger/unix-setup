@@ -1,0 +1,152 @@
+" Gotta be first
+filetype plugin indent on
+
+" General settings
+set tabstop=2 shiftwidth=2 softtabstop=2
+set smarttab
+set expandtab
+set ruler
+set number
+set showcmd
+set hlsearch
+set incsearch
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set nowrap
+set textwidth=0
+set wrapmargin=0
+
+" Set a more convenient key for leader
+let mapleader = ","
+
+" Install Vim-Plug if it is not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
+  Plug 'Raimondi/delimitMate'
+  Plug 'vim-airline/vim-airline'
+  Plug 'scrooloose/nerdtree'
+  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'kien/ctrlp.vim'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'vim-syntastic/syntastic'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Testing
+  Plug 'janko/vim-test'
+
+  " Elixir
+  Plug 'elixir-editors/vim-elixir'
+
+  " Go
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+  " Themes
+  Plug 'mhartington/oceanic-next'
+call plug#end()
+
+" Theme
+syntax enable
+let g:airline_theme='oceanicnext'
+colorscheme OceanicNext
+
+" Easier window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" jj as Escape
+inoremap jj <Esc>
+
+" Airline
+let g:airline_powerline_fonts = 1
+
+" NERDTree
+nmap <silent> <leader>n :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_open_on_console_startup = 0
+nnoremap th :tabnext<CR>
+nnoremap tl :tabprev<CR>
+nnoremap tn :tabnew<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" NERDTree tabs
+let g:nerdtree_tabs_open_on_console_startup = 2
+let g:nerdtree_tabs_smart_startup_focus = 2
+
+" NERDTree Ignore folders
+let g:NERDTreeIgnore=['\$', 'vendor', 'node_modules', '_build', 'deps']
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{coc#status()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|_build|deps|target|dist)|(\.(swp|ico|git|svn))$'
+
+" clear search highlight by hitting return in command mode
+nnoremap <CR> :noh<CR><CR>
+
+" Better Coc experience
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+" Make <tab> used for trigger, completion confirm, snipped expand and jump like VSCode
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Call format on save
+autocmd BufWritePost * silent call CocAction('format')
+
+" Autocomplete for Go when the dot is pressed
+au filetype go inoremap . .<C-x><C-o>
