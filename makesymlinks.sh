@@ -1,16 +1,20 @@
-#!/usr/bin/env bash
+earl#!/usr/bin/env bash
 
-dir=~/mac-os-x-setup/dotfiles
+dir=$(pwd)/dotfiles
 olddir=~/dotfiles_old
-files="zshrc gitignore vimrc inputrc gitconfig"
+files="zshrc gitignore vimrc inputrc gitconfig gemrc"
 
 mkdir -p $olddir
 
 cd $dir
 
+# Symlink all dotfiles
 for file in $files; do
   echo "Moving any existing dotfiles from ~ to $olddir"
   mv ~/.$file $olddir
   echo "Creating symlink to $file in home directory."
   ln -s $dir/$file ~/.$file
 done
+
+# Copy custom zsh theme
+cp codehugger.zsh-theme ~/.oh-my-zsh/custom/themes/codehugger.zsh-theme

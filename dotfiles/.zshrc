@@ -97,19 +97,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 # rbenv
 eval "$(rbenv init -)"
 
-# Enable homebrew autocomplete
-if type brew &>/dev/null; then
+# Enable autocomplete
+if type brew &>/dev/null; then  
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
 
-# zsh-completions
-autoload -U compinit && compinit
+  autoload -Uz compinit
+  compinit
+fi
 
 # LOCALE
 export LC_ALL=en_US.UTF-8
@@ -127,6 +125,3 @@ export GOBIN="$GOPATH/bin"
 
 # Disable annoying ^C output
 stty -echoctl
-
-# Enable syntax highlighting (MUST BE THE LAST COMMAND)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
