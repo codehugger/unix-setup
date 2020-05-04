@@ -128,5 +128,10 @@ export GOBIN="$GOPATH/bin"
 # Disable annoying ^C output
 stty -echoctl
 
+
+# Enable zsh-autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^ ' autosuggest-accept
+
 # Enable syntax highlighting (MUST BE THE LAST COMMAND)
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

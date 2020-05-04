@@ -15,6 +15,3 @@ for file in $files; do
   echo "Creating symlink to $file in home directory."
   ln -s $dir/$file ~/.$file
 done
-
-# Copy custom zsh theme
-cp codehugger.zsh-theme ~/.oh-my-zsh/custom/themes/codehugger.zsh-theme

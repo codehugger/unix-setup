@@ -74,9 +74,15 @@ defaults write com.apple.dock autohide -bool true
 killall Dock
 killall Finder
 
+# Configure Exercism
+exercism configure -w ~/Projects/exercism
+
 # Disable non-breaking space everywhere
 mkdir -p ~/Library/KeyBindings
 cp DefaultKeyBinding.dict ~/Library/KeyBindings/
+
+# Copy custom themes
+cp themes/codehugger.zsh-theme ~/.oh-my-zsh/custom/themes/codehugger.zsh-theme
 
 # Symlink dotfiles
 ./makesymlinks.sh
