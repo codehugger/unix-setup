@@ -10,9 +10,6 @@ xcode-select --install
 rm -rf ~/.oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# Enable Homebrew Casks
-brew install caskroom/cask
-
 # Install essential libraries
 brew install graphviz
 
@@ -36,25 +33,39 @@ brew install zsh-completions
 brew install zsh-navigation-tools
 brew install zsh-syntax-highlighting
 
+# Enable Homebrew Casks
+brew install caskroom/cask
+
 # Install applications
-brew cask install --appdir="/Applications" alfred
 brew cask install --appdir="/Applications" docker
 brew cask install --appdir="/Applications" expressvpn
 brew cask install --appdir="/Applications" firefox
-brew cask install --appdir="/Applications" firefox-developer-edition
 brew cask install --appdir="/Applications" google-chrome
 brew cask install --appdir="/Applications" iterm2
 brew cask install --appdir="/Applications" paw
 brew cask install --appdir="/Applications" postgres
 brew cask install --appdir="/Applications" postico
-brew cask install --appdir="/Applications" visual-studio-code
 brew cask install --appdir="/Applications" vlc
+brew cask install --appdir="/Applications" spotify
+brew cask install --appdir="/Applications" steam
+brew cask install --appdir="/Applications" transmission
+
+# RU
+brew cask install --appdir="/Applications" zoomus
+
+# Annata specifics
+brew cask install --appdir="/Applications" dotnet
+brew cask install --appdir="/Applications" yammer
+brew cask install --appdir="/Applications" microsoft-teams
+
+# Visual Studio Code Insiders
+brew tap homebrew/cask-versions
+brew cask install --appdir="/Applications" visual-studio-code-insiders
 
 # Install fonts
+brew tap homebrew/cask-fonts
 brew cask install font-fira-code
-
-# Install extensions for VSCode
-
+brew cask install font-inconsolata
 
 # Set macOS defaults
 # to revert all settings: defaults delete com.apple.dock; killall Dock
@@ -66,6 +77,7 @@ defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
 defaults write -g NSSpellCheckerAutomaticallyIdentifiesLanguages -bool false
 defaults write -g AppleFontSmoothing -int 2
 defaults write -g AppleInterfaceStyleSwitchesAutomatically -bool true
+defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write com.apple.finder CreateDesktop false
 defaults write com.apple.dock mineffect -string scale
 defaults write com.apple.dock tilesize -integer 48
