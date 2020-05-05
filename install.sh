@@ -31,6 +31,7 @@ brew install exercism
 brew install http-server
 
 # Install ZSH plugins
+brew install zsh-autosuggestions
 brew install zsh-completions
 brew install zsh-navigation-tools
 brew install zsh-syntax-highlighting

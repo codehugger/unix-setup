@@ -106,10 +106,10 @@ eval "$(rbenv init -)"
 # Enable homebrew autocomplete
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
 fi
-
-# zsh-completions
-autoload -U compinit && compinit
 
 # LOCALE
 export LC_ALL=en_US.UTF-8
@@ -118,8 +118,8 @@ export LC_ALL=en_US.UTF-8
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Java for Threadneedle
-export PATH="$(/usr/libexec/java_home):$PATH"
-export PATH_TO_FX="/Users/bjarki/Projects/threadneedle/javafx-sdk-11.0.2/lib"
+# export PATH="$(/usr/libexec/java_home):$PATH"
+# export PATH_TO_FX="/Users/bjarki/Projects/threadneedle/javafx-sdk-11.0.2/lib"
 
 # Go specifics
 export GOPATH="$HOME/Projects/go"
