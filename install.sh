@@ -53,7 +53,7 @@ brew cask install --appdir="/Applications" transmission
 # RU
 brew cask install --appdir="/Applications" zoomus
 
-# Annata specifics
+# Annata stuff
 brew cask install --appdir="/Applications" dotnet
 brew cask install --appdir="/Applications" yammer
 brew cask install --appdir="/Applications" microsoft-teams
@@ -66,26 +66,39 @@ brew cask install --appdir="/Applications" visual-studio-code-insiders
 brew tap homebrew/cask-fonts
 brew cask install font-fira-code
 brew cask install font-inconsolata
+brew cask install font-roboto-mon
+brew cask install font-input
 
 # Set macOS defaults
-# to revert all settings: defaults delete com.apple.dock; killall Dock
+# Disable annoying keyboard features
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write -g NSAutomaticCapitalizationEnabled -bool false
 defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
 defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
 defaults write -g NSSpellCheckerAutomaticallyIdentifiesLanguages -bool false
-defaults write -g AppleFontSmoothing -int 2
+
+# Font rendering on non-retina sucks
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
+defaults write -g AppleFontSmoothing -int 1
+
+# Automatic dark/light mode
 defaults write -g AppleInterfaceStyleSwitchesAutomatically -bool true
-defaults write -g ApplePressAndHoldEnabled -bool false
+
+# defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write com.apple.finder CreateDesktop false
+# to revert all dock settings: defaults delete com.apple.dock; killall Dock
 defaults write com.apple.dock mineffect -string scale
 defaults write com.apple.dock tilesize -integer 48
 defaults write com.apple.dock autohide-time-modifier -float 0
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock autohide -bool true
+
 killall Dock
 killall Finder
+
+# Install global NPM packages
+npm install -g ncu
+npm install -g jshint
 
 # Configure Exercism
 exercism configure -w ~/Projects/exercism
@@ -102,3 +115,6 @@ cp themes/codehugger.zsh-theme ~/.oh-my-zsh/custom/themes/codehugger.zsh-theme
 
 # Make compaudit happy
 for f in $(compaudit);do sudo chmod -R 755 $f;done;
+
+# Support italics in terminal
+tic -o ~/.terminfo dotfiles/xterm-256color.terminfo
