@@ -67,7 +67,7 @@ ZSH_THEME="codehugger"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git mix)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,8 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+# aliases
+alias code="code-insiders"
 
 # rbenv
 eval "$(rbenv init -)"
@@ -128,10 +128,13 @@ export GOBIN="$GOPATH/bin"
 # Disable annoying ^C output
 stty -echoctl
 
+# Enable syntax highlighting (MUST BE THE LAST COMMAND)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^ ' autosuggest-accept
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Enable syntax highlighting (MUST BE THE LAST COMMAND)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Postgres.app
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
