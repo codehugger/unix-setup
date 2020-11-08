@@ -53,6 +53,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'phanviet/vim-monokai-pro'
   Plug 'rakr/vim-one'
+  Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " Theme
@@ -73,7 +74,7 @@ if (empty($TMUX))
   endif
 endif
 syntax enable
-colorscheme one
+colorscheme nord
 
 " Lightline
 let g:lightline = {
