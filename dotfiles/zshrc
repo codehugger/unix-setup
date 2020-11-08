@@ -67,7 +67,7 @@ ZSH_THEME="codehugger"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mix)
+plugins=(git zsh-autocomplete zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,9 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# aliases
-alias code="code-insiders"
-
 # rbenv
 eval "$(rbenv init -)"
 
@@ -118,8 +115,8 @@ export LC_ALL=en_US.UTF-8
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Java for Threadneedle
-# export PATH="$(/usr/libexec/java_home):$PATH"
-# export PATH_TO_FX="/Users/bjarki/Projects/threadneedle/javafx-sdk-11.0.2/lib"
+export PATH="$(/usr/libexec/java_home):$PATH"
+export PATH_TO_FX="/Users/bjarki/Projects/javafx-sdk-11.0.2/lib"
 
 # Go specifics
 export GOPATH="$HOME/Projects/go"
@@ -128,13 +125,18 @@ export GOBIN="$GOPATH/bin"
 # Disable annoying ^C output
 stty -echoctl
 
-# Enable syntax highlighting (MUST BE THE LAST COMMAND)
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Enable zsh-autosuggestions
-bindkey '^ ' autosuggest-accept
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Postgres.app
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Nord dircolors
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+
+# LSD aliases
+alias ls='lsd'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
