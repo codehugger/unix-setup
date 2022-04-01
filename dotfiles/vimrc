@@ -54,6 +54,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'phanviet/vim-monokai-pro'
   Plug 'rakr/vim-one'
   Plug 'arcticicestudio/nord-vim'
+  Plug 'ghifarit53/tokyonight-vim'
 call plug#end()
 
 " Theme
@@ -74,7 +75,11 @@ if (empty($TMUX))
   endif
 endif
 syntax enable
-colorscheme nord
+
+let g:lightline = {'colorscheme' : 'tokyonight'}
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 
 " Lightline
 let g:lightline = {
