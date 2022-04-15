@@ -8,7 +8,7 @@ export ZSH="/Users/bjarki/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="codehugger"
+ZSH_THEME="wezm"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -67,7 +67,7 @@ ZSH_THEME="codehugger"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autocomplete zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,41 +97,25 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# rbenv
-eval "$(rbenv init -)"
-
-# Enable homebrew autocomplete
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
-fi
-
-# LOCALE
-export LC_ALL=en_US.UTF-8
-
-# Enable history in IEX through Erlang(OTP)
-export ERL_AFLAGS="-kernel shell_history enabled"
-
-# Java for Threadneedle
-export PATH="$(/usr/libexec/java_home):$PATH"
-export PATH_TO_FX="/Users/bjarki/Projects/javafx-sdk-11.0.2/lib"
-
-# Go specifics
-export GOPATH="$HOME/Projects/go"
+# Go
+export GOPATH="$HOME/.go"
 export GOBIN="$GOPATH/bin"
 
-# Disable annoying ^C output
-stty -echoctl
+# Direnv
+eval "$(direnv hook zsh)"
+setopt PROMPT_SUBST
+show_virtual_env() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    echo "($(basename $VIRTUAL_ENV))"
+  fi
+}
+PS1='$(show_virtual_env)'$PS1
 
-# Postgres.app
-export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Nord dircolors
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+# Ruby
+eval "$(rbenv init -)"
 
 # LSD aliases
 alias ls='lsd'
