@@ -1,1 +1,1 @@
-# mac-os-x-setup
+# unix-setup
