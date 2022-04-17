@@ -13,11 +13,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 wget https://github.com/Peltoche/lsd/releases/download/0.21.0/lsd_0.21.0_amd64.deb -O /tmp/lsd.deb
 sudo dpkg -i /tmp/lsd.deb
 
-# install ruby-build
-rbenv init
-eval "$(rbenv init -)"
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-
 # copy .dotfiles from github
 mkdir -p ~/.config/direnv
 wget https://raw.githubusercontent.com/codehugger/unix-setup/master/dotfiles/gitconfig -O ~/.gitconfig
