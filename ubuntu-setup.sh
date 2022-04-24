@@ -2,7 +2,7 @@
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # install dev essentials
-sudo apt install -y git zsh vim elixir golang nodejs npm direnv python3-pip python3-venv build-essential inotify-tools rbenv
+sudo apt install -y git zsh vim erlang elixir golang nodejs npm direnv python3-pip python3-venv build-essential inotify-tools rbenv
 
 # install oh-my-zsh with plugins
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
